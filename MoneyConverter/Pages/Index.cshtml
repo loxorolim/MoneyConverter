@@ -9,14 +9,12 @@
     <h1 class="display-3">Quotations</h1>
     <hr class="my-4">
     <p class="lead">United States Dollar quotation on the most important world currencies.</p>
-    <div class="row">
-        <div data-bind="foreach: quotations">
-            <div class="col-md-4">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-body text-center">
-                        <h4 class="card-title" data-bind="text: currencyName"></h4>
-                        <h5 class="card-text" data-bind="text: formattedCurrency()"></h5>
-                    </div>
+    <div class="row" data-bind="foreach: quotations">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title" data-bind="text: currencyName"></h4>
+                    <h5 class="card-text" data-bind="text: formattedCurrency()"></h5>
                 </div>
             </div>
         </div>
