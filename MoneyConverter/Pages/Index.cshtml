@@ -13,7 +13,7 @@
         <div class="col-md-4">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body text-center">
-                    <h4 class="card-title" data-bind="text: currencyName"></h4>
+                    <h4 class="card-title" data-bind="text: fullName()"></h4>
                     <h5 class="card-text" data-bind="text: formattedCurrency()"></h5>
                 </div>
             </div>
@@ -26,8 +26,12 @@
         <div class="form-group">
             <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
             <div class="input-group">
-                <div class="input-group-addon">USD$</div>
+                <select class="custom-select input-group-addon" data-bind="options: $root.quotations, value: inputQuotation, optionsText: 'currencyAbbreviation'"></select>
+                <div class="input-group-addon" data-bind="text: inputQuotation().currencySymbol"></div>
                 <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                <select class="custom-select input-group-addon" data-bind="options: $root.quotations, value: outputQuotation, optionsText: 'currencyAbbreviation'"></select>
+                <div class="input-group-addon" data-bind="text: outputQuotation().currencySymbol"></div>
+                <input type="text" class="form-control" id="exampleInputAmount" readonly="readonly">
             </div>
         </div>
     </div>
