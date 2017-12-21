@@ -4,47 +4,25 @@
     ViewData["Title"] = "Home page";
 }
 
+
 <div class="jumbotron">
     <h1 class="display-3">Quotations</h1>
     <hr class="my-4">
     <p class="lead">United States Dollar quotation on the most important world currencies.</p>
     <div class="row">
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body text-center">
-                    <h4 class="card-title">Euro (EUR)</h4>
-                    <h5 class="card-text"> € 342.00</h5>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body text-center">
-                    <h4 class="card-title">Great Britain Pounds (GBP)</h4>
-                    <h5 class="card-text"> £ 123.00</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body text-center">
-                    <h4 class="card-title">Japan Yene (JPY)</h4>
-                    <h5 class="card-text"> ¥ 342.00</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body text-center">
-                    <h4 class="card-title">Yuan (CNH)</h4>
-                    <h5 class="card-text"> 元 342.00</h5>
+        <div data-bind="foreach: quotations">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body text-center">
+                        <h4 class="card-title" data-bind="text: currencyName"></h4>
+                        <h5 class="card-text" data-bind="text: formattedCurrency()"></h5>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <hr class="my-4">
-    <p class="lead">Type an amount and visualize its quotation in multiple currecies.</p>
+    <p class="lead">Type an amount and visualize its quotation in multiple currencies.</p>
     <div class="form-group">
         <label class="control-label">Amount</label>
         <div class="form-group">
