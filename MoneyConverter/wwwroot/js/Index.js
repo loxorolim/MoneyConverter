@@ -19,8 +19,7 @@ var indexViewModel = new function IndexViewModel () {
 
     var self = this;
 
-    self.inputAmount = ko.observable();
-    self.outputAmount = ko.observable();
+    self.quotations = []
 
     self.currencies = [
         new Currency("Euro", "EUR", "€", 0),
@@ -30,7 +29,8 @@ var indexViewModel = new function IndexViewModel () {
         new Currency("United States Dollar", "USD", "$", 0)
     ]; 
 
-    self.quotations = []
+    self.inputAmount = ko.observable();
+    self.outputAmount = ko.observable();
 
     self.inputCurrency = ko.observable(self.currencies[0]);
     self.outputCurrency = ko.observable(self.currencies[0]);
@@ -47,16 +47,20 @@ var indexViewModel = new function IndexViewModel () {
 
         var url = "https://forex.1forge.com/1.0.2/quotes?" + pairs + "&api_key=Yer9o3wICwhKlviLU0zZGavH9AGZuqd3";
 
-        $.get(
-            url,
-            function (data) {
+        $.ajax({
+            url: url,
+            type: "get",
+            async: false,
+            success: function (data) {
                 self.quotations = data;
-                self.updateQuotations();
             }
-        );
+        });
     }
 
     self.updateQuotations = function () {
+
+        self.fetchQuotations();
+
         for (i = 0; i < self.currencies.length; i++) {
             for (j = 0; j < self.quotations.length; j++) {
                 if (self.quotations[j].symbol == ("USD" + self.currencies[i].currencyAbbreviation)) {
@@ -66,8 +70,8 @@ var indexViewModel = new function IndexViewModel () {
         }
     }
 
-    self.fetchQuotations();
-    setInterval(self.fetchQuotations, 30000);
+    self.updateQuotations();
+    setInterval(self.updateQuotations, 30000);
     
 }
 
