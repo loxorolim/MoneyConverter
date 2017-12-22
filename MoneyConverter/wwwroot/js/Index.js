@@ -29,8 +29,15 @@ var indexViewModel = new function IndexViewModel () {
         new Currency("United States Dollar", "USD", "$", 0)
     ]; 
 
-    self.inputAmount = ko.observable();
-    self.outputAmount = ko.observable();
+    self.inputAmount = ko.observable(0);
+    self.outputAmount = ko.computed(function () {
+        for (i = 0; i < self.quotations.length; i++) {
+            if (self.quotations[i].symbol == (self.inputCurrency().currencyAbbreviation + self.outputCurrency().currencyAbbreviation)) {
+                return self.inputAmount() * self.quotations[i].price;
+            }
+        }
+        return self.inputAmount();
+    });
 
     self.inputCurrency = ko.observable(self.currencies[0]);
     self.outputCurrency = ko.observable(self.currencies[0]);

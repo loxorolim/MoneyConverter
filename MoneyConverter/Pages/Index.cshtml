@@ -33,7 +33,7 @@
                 <input type="text" class="form-control" placeholder="Amount" data-bind="value: inputAmount">
                 <select class="custom-select input-group-addon" data-bind="options: $root.currencies, value: outputCurrency, optionsText: 'currencyAbbreviation'"></select>
                 <div class="input-group-addon" data-bind="text: outputCurrency().currencySymbol"></div>
-                <input type="text" class="form-control" readonly="readonly" data-bind="text: outputCurrency()">
+                <input type="text" class="form-control" readonly="readonly" data-bind="value: outputAmount">
             </div>
         </div>
     </div>
