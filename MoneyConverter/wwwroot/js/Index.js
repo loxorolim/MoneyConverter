@@ -1,4 +1,4 @@
-﻿function Quotation(name, abbreviation, symbol, value) {
+﻿function Currency(name, abbreviation, symbol, value) {
     var self = this;
     self.currencyName = name;
     self.currencyAbbreviation = abbreviation;
@@ -20,31 +20,54 @@ var indexViewModel = new function IndexViewModel () {
     var self = this;
 
     self.inputAmount = ko.observable();
+    self.outputAmount = ko.observable();
 
-    self.quotations = ko.observableArray([
-        new Quotation("Euro", "EUR", "€", 0),
-        new Quotation("Great Britain Pound","GBP", "£", 0),
-        new Quotation("Japan Yen", "JPY", "¥", 0),
-        new Quotation("Yuan", "CNH", "元", 0)
-    ]); 
+    self.currencies = [
+        new Currency("Euro", "EUR", "€", 0),
+        new Currency("Great Britain Pound","GBP", "£", 0),
+        new Currency("Japan Yen", "JPY", "¥", 0),
+        new Currency("Yuan", "CNH", "元", 0),
+        new Currency("United States Dollar", "USD", "$", 0)
+    ]; 
 
-    self.inputQuotation = ko.observable(self.quotations()[0]);
-    self.outputQuotation = ko.observable(self.quotations()[0]);
+    self.quotations = []
 
-    self.updateValues = function () {
+    self.inputCurrency = ko.observable(self.currencies[0]);
+    self.outputCurrency = ko.observable(self.currencies[0]);
+
+    self.fetchQuotations = function () {
+
+        var pairs = "pairs=";
+
+        for (i = 0; i < self.currencies.length; i++) {
+            for (j = 0; j < self.currencies.length; j++) {
+                pairs += self.currencies[i].currencyAbbreviation + self.currencies[j].currencyAbbreviation + ",";
+            }
+        }
+
+        var url = "https://forex.1forge.com/1.0.2/quotes?" + pairs + "&api_key=Yer9o3wICwhKlviLU0zZGavH9AGZuqd3";
 
         $.get(
-            "https://forex.1forge.com/1.0.2/quotes?pairs=USDEUR,USDGBP,USDJPY,USDCNH&api_key=Yer9o3wICwhKlviLU0zZGavH9AGZuqd3",
+            url,
             function (data) {
-                for (i = 0; i < data.length; i++) {
-                    self.quotations()[i].value(data[i].price);
-                }
+                self.quotations = data;
+                self.updateQuotations();
             }
         );
     }
 
-    self.updateValues();
-    setInterval(self.updateValues, 30000);
+    self.updateQuotations = function () {
+        for (i = 0; i < self.currencies.length; i++) {
+            for (j = 0; j < self.quotations.length; j++) {
+                if (self.quotations[j].symbol == ("USD" + self.currencies[i].currencyAbbreviation)) {
+                    self.currencies[i].value(self.quotations[j].price);
+                }
+            }
+        }
+    }
+
+    self.fetchQuotations();
+    setInterval(self.fetchQuotations, 30000);
     
 }
 

@@ -9,14 +9,16 @@
     <h1 class="display-3">Quotations</h1>
     <hr class="my-4">
     <p class="lead">United States Dollar quotation on the most important world currencies.</p>
-    <div class="row" data-bind="foreach: quotations">
+    <div class="row" data-bind="foreach: currencies">
         <div class="col-md-4">
+            <!-- ko if: currencyAbbreviation != "USD" -->
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body text-center">
                     <h4 class="card-title" data-bind="text: fullName()"></h4>
                     <h5 class="card-text" data-bind="text: formattedCurrency()"></h5>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
     <hr class="my-4">
@@ -26,12 +28,12 @@
         <div class="form-group">
             <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
             <div class="input-group">
-                <select class="custom-select input-group-addon" data-bind="options: $root.quotations, value: inputQuotation, optionsText: 'currencyAbbreviation'"></select>
-                <div class="input-group-addon" data-bind="text: inputQuotation().currencySymbol"></div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                <select class="custom-select input-group-addon" data-bind="options: $root.quotations, value: outputQuotation, optionsText: 'currencyAbbreviation'"></select>
-                <div class="input-group-addon" data-bind="text: outputQuotation().currencySymbol"></div>
-                <input type="text" class="form-control" id="exampleInputAmount" readonly="readonly">
+                <select class="custom-select input-group-addon" data-bind="options: $root.currencies, value: inputCurrency, optionsText: 'currencyAbbreviation'"></select>
+                <div class="input-group-addon" data-bind="text: inputCurrency().currencySymbol"></div>
+                <input type="text" class="form-control" placeholder="Amount" data-bind="value: inputAmount">
+                <select class="custom-select input-group-addon" data-bind="options: $root.currencies, value: outputCurrency, optionsText: 'currencyAbbreviation'"></select>
+                <div class="input-group-addon" data-bind="text: outputCurrency().currencySymbol"></div>
+                <input type="text" class="form-control" readonly="readonly" data-bind="text: outputCurrency()">
             </div>
         </div>
     </div>
