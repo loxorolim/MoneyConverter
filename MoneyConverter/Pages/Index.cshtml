@@ -10,16 +10,16 @@
     <hr class="my-4">
     <p class="lead">United States Dollar quotation on the most important world currencies.</p>
     <div class="row" data-bind="foreach: currencies">
+        <!-- ko if: currencyAbbreviation != "USD" -->
         <div class="col-md-4">
-            <!-- ko if: currencyAbbreviation != "USD" -->
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body text-center">
                     <h4 class="card-title" data-bind="text: fullName()"></h4>
                     <h5 class="card-text" data-bind="text: formattedCurrency()"></h5>
                 </div>
             </div>
-            <!-- /ko -->
         </div>
+        <!-- /ko -->
     </div>
     <hr class="my-4">
     <p class="lead">Type an amount and visualize its quotation in multiple currencies.</p>
