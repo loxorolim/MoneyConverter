@@ -26,7 +26,13 @@ var indexViewModel = new function IndexViewModel () {
         new Currency("Great Britain Pound","GBP", "£", 0),
         new Currency("Japan Yen", "JPY", "¥", 0),
         new Currency("Yuan", "CNH", "元", 0),
-        new Currency("United States Dollar", "USD", "$", 0)
+        new Currency("United States Dollar", "USD", "$", 0),
+        new Currency("Brazilian Real", "BRL", "R$", 0),
+        new Currency("Swiss Franc", "CHF", "SFr.", 0),
+        new Currency("Canadian Dollar", "CAD", "C$", 0),
+        new Currency("Australian Dollar", "AUD", "A$", 0),
+        new Currency("New Zealand Dollar", "NZD", "$", 0),
+        new Currency("South African Rand", "ZAR", "R", 0),
     ]; 
 
     self.inputAmount = ko.observable(0);
