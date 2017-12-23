@@ -3,17 +3,33 @@
 @{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+}
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div id="circularListChallenge" class="jumbotron">
+    <h1 class="display-3">Circular List Challenge</h1>
+    <p class="lead">Type in a circular list and a value to check if it exists in O(Logn) complexity!</p>
+    <hr class="my-4">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">Value</div>
+            <input type="text" class="form-control" placeholder="Value" data-bind="value: inputtedValue">
+            <div class="input-group-addon">List</div>
+            <input type="text" class="form-control" placeholder="Circular List - Ex.: 4,6,11,-1,1,2,3" data-bind="value: inputtedList">
+            <button type="submit" class="btn btn-primary input-group-addon" data-bind="click: checkIfExists">Submit</button>
+        </div>
+    </div>
+    <div class="text-center">
+        <h1 data-bind="text: response"></h1>
+    </div>
+</div>
+<script type="text/javascript">
+    function getToken() {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+    }
+</script>
+<script src="~/js/CircularListChallenge.js"></script>
