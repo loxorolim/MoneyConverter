@@ -3,18 +3,33 @@
 @{
     ViewData["Title"] = "Contact";
 }
-<div class="jumbotron">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+}
+
+<div id="circularListChallenge" class="jumbotron">
     <h1 class="display-3">Circular List Challenge</h1>
-    <p class="lead">Type in a circular list and a number to check if it exists in O(Logn) complexity!</p>
+    <p class="lead">Type in a circular list and a value to check if it exists in O(Logn) complexity!</p>
     <hr class="my-4">
     <div class="form-group">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-addon">List</div>
-                <input type="text" class="form-control" id="exampleList" placeholder="Ex.: 4,6,11,-1,1,2,3">
-                <button type="submit" class="btn btn-primary input-group-addon">Submit</button>
-            </div>
+        <div class="input-group">
+            <div class="input-group-addon">Value</div>
+            <input type="text" class="form-control" placeholder="Value" data-bind="value: inputtedValue">
+            <div class="input-group-addon">List</div>
+            <input type="text" class="form-control" placeholder="Circular List - Ex.: 4,6,11,-1,1,2,3" data-bind="value: inputtedList">
+            <button type="submit" class="btn btn-primary input-group-addon" data-bind="click: checkIfExists">Submit</button>
         </div>
     </div>
-
+    <div class="text-center">
+        <h1 data-bind="text: response"></h1>
+    </div>
 </div>
+<script type="text/javascript">
+    function getToken() {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+    }
+</script>
+<script src="~/js/CircularListChallenge.js"></script>
