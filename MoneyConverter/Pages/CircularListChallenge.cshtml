@@ -3,17 +3,18 @@
 @{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
+<div class="jumbotron">
+    <h1 class="display-3">Circular List Challenge</h1>
+    <p class="lead">Type in a circular list and a number to check if it exists in O(Logn) complexity!</p>
+    <hr class="my-4">
+    <div class="form-group">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">List</div>
+                <input type="text" class="form-control" id="exampleList" placeholder="Ex.: 4,6,11,-1,1,2,3">
+                <button type="submit" class="btn btn-primary input-group-addon">Submit</button>
+            </div>
+        </div>
+    </div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+</div>
