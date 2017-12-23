@@ -1,6 +1,4 @@
-﻿
-
-var circularListChallengeViewModel = new function CircularListChallengeViewModel() {
+﻿var circularListChallengeViewModel = new function CircularListChallengeViewModel() {
     var self = this;
 
     self.inputtedValue = 0;
